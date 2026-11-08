@@ -12,7 +12,6 @@ class User extends Model
     protected $primaryKey = 'id_user';
     public $timestamps = true;
 
-
     protected $fillable = [
         'nom_user',
         'prenom_user',
@@ -22,4 +21,9 @@ class User extends Model
         'password_user',
         'status_user'
     ];
+
+    public function produits()
+    {
+        return $this->hasMany(Produit::class, 'user_id', 'id_user');
+    }
 }
