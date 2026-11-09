@@ -20,3 +20,9 @@ Route::get('/produits/{id}', [ProduitController::class, 'show']);
 Route::post('/produits', [ProduitController::class, 'store']);
 Route::put('/produits/{id}', [ProduitController::class, 'update']);
 Route::delete('/produits/{id}', [ProduitController::class, 'destroy']);
+
+Route::get('/blocs', [ProduitController::class, 'index']);
+Route::get('/blocs/{id}', [ProduitController::class, 'show']);
+Route::post('/blocs', [ProduitController::class, 'store']);
+Route::put('/blocs/{id}', [ProduitController::class, 'update']);
+Route::delete('/blocs/{id}', [ProduitController::class, 'destroy']);

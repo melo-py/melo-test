@@ -13,7 +13,7 @@ class Usercontroller extends Controller
     public function index()
     {
         $user = User::all();
-        return response()->json($users);
+        return response()->json($user);
     }
 
     /**
@@ -30,7 +30,7 @@ class Usercontroller extends Controller
      */
     public function show(string $id)
     {
-        $user =Users::find($id);
+        $user =User::find($id);
         if($user){
             return response()->json($user);
         }else{
@@ -43,17 +43,10 @@ class Usercontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user =  Users::find($id);
-        if($user){
-            $resp = $user->update($request ->all());
-            if($resp){
-                return response()->json(['message'=>'User updated successfully'],200);
-            }else{
-                return response()->json(['message'=>'Failled to update'],500);
-            }
-        }else{
-             return response()->json(['message'=>'Not found'],404);
-        }
+        $user =  User::findOrFail($id);
+        $resp = $user->update($request ->all());
+        return response()->json(['message'=>'User updated successfully'],200);
+            
     }
 
     /**
@@ -61,16 +54,8 @@ class Usercontroller extends Controller
      */
     public function destroy(string $id)
     {
-        $user =  Users::find($id);
-        if($user){
-            $resp = $user->delete($request ->all());
-            if($resp){
-                return response()->json(['message'=>'User deleted successfully'],200);
-            }else{
-                return response()->json(['message'=>'Failled to delete'],500);
-            }
-        }else{
-             return response()->json(['message'=>'Not found'],404);
-        }
+        $user =  Users::findOrFail($id);
+        $resp = $user->delete($request ->all());
+        return response()->json(['message'=>'User deleted successfully'],200);    
     }
 }
