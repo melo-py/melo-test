@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
+
 class User extends Model
 {
     protected $table = 'users';
@@ -25,5 +26,14 @@ class User extends Model
     public function produits()
     {
         return $this->hasMany(Produit::class, 'user_id', 'id_user');
+    }
+    function role()
+    {
+        return $this->belongsToMany(Role::class, 'user_id', 'id_role');
+    }
+
+    function commandes()
+    {
+        return $this->belongsToMany(Commande::class, 'user_id', 'id_commande');
     }
 }

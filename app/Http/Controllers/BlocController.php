@@ -14,6 +14,8 @@ class BlocController extends Controller
     {
         $blocs = Bloc::all();
         return response ->json($blocs);
+
+
     }
 
     /**
@@ -32,6 +34,9 @@ class BlocController extends Controller
     {
         $bloc = Bloc::findOFail($id);
         return response-json($bloc);
+       
+
+
     }
 
     /**
