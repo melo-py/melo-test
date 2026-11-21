@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'users';
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
@@ -18,6 +18,7 @@ class User extends Model
         'prenom_user',
         'phone_user',
         'email_user',
+        'sexe_user',
         'login_user',
         'password_user',
         'status_user'
@@ -25,7 +26,7 @@ class User extends Model
 
     public function produits()
     {
-        return $this->hasMany(Produit::class, 'user_id', 'id_user');
+        return $this->hasMany(Produit::class, 'user_id', 'id');
     }
     function role()
     {

@@ -20,7 +20,13 @@ class CommandeController extends Controller
      */
     public function store(Request $request)
     {
-        $commande = Commande::create($request->all());
+        $validated = $request->validate([
+            'date_commande'=> 'required|date',
+            'total_commande'=> 'required|numeric|min:0',
+            'statut_commande'=> 'ACTIF',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+        $commade= Commande::create($validated);
         return response()->json($commande, 201);
     }
 

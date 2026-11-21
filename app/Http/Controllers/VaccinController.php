@@ -21,7 +21,11 @@ class VaccinController extends Controller
      */
     public function store(Request $request)
     {
-        $vaccin = Vaccin::create($request->all());
+        $validated=$request->validate([
+                'label_vaccin'=>'required|string|max:128',
+                'prix_vaccin'=>'required|numeric|min:0' 
+        ]);
+        $vaccin = Vaccin::create($validated);
         return response()->json($vaccin, 201); 
     }
 

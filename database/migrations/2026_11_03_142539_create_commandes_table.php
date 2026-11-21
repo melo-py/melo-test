@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id('id_commande');
         $table->date('date_commande');
         $table->decimal('total_commande', 12, 2);
-        $table->string('statut_commande', 50);
+        $table->enum('statut_commande', ['ACTIF','SUSPENDUE']);
 
         $table->unsignedBigInteger('user_id');
 

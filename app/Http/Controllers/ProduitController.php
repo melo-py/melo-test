@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use Illuminate\Validation\Rule;
 
 class ProduitController extends Controller
 {
@@ -21,7 +22,16 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        $produit = Produit::create($request->all());
+        $validated = $request->validate([
+            'label_produit' =>'required|string|max:128',
+            'description_produit' => 'required|string|max:200',
+            'type_produit' => 'required|string|max:100',
+            'quantite_produit' =>'required|integer|min:0',
+            'prix_produit' => 'required|numeric|min:0',
+            'user_id' => 'required|integer|exists:users,id',
+            'bloc_id' => 'required|integer|exists:bloc,bloc_id'
+        ]);
+        $produit = Produit::create($validated);
         return response()->json($produit, 201);
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('label_permission');
+            $table->string('label_permission',128);
             $table->timestamps();
         });
     }

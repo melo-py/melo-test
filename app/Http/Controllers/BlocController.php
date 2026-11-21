@@ -13,7 +13,7 @@ class BlocController extends Controller
     public function index()
     {
         $blocs = Bloc::all();
-        return response ->json($blocs);
+        return response()->json($blocs);
 
 
     }
@@ -23,8 +23,11 @@ class BlocController extends Controller
      */
     public function store(Request $request)
     {
-        $bloc = Bloc::create(request->all());
-        return response->json($bloc , 201);
+        $validated = $request->validate([
+                'label_bloc'=>'required|string|max:128'
+        ]);
+        $bloc = Bloc::create($validated);
+        return response()->json(['message' => 'Bloc Cree avec succes'], 201);
     }
 
     /**
@@ -33,7 +36,7 @@ class BlocController extends Controller
     public function show(string $id)
     {
         $bloc = Bloc::findOFail($id);
-        return response-json($bloc);
+        return response()->json($bloc);
        
 
 
@@ -46,7 +49,7 @@ class BlocController extends Controller
     {
         $bloc = Bloc::findOrFail($id);
         $bloc->update($request->all());
-        return response()->json(["message => Bloc mis a jour avec succes!"], 200);
+        return response()->json(['message' => 'Bloc mis a jour avec succes!'], 200);
     }
 
     /**
